@@ -10,8 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
@@ -86,11 +84,6 @@ class BarcodeScannerFragment : Fragment() {
     }
 
     private fun bindPreview(cameraProviderFuture: ProcessCameraProvider) {
-        val imageCapture = ImageCapture.Builder().build()
-        val imageAnalysis = ImageAnalysis.Builder()
-            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-            .build()
-
         val preview = Preview.Builder().build().apply {
             setSurfaceProvider(binding.preview.surfaceProvider)
         }
@@ -99,8 +92,6 @@ class BarcodeScannerFragment : Fragment() {
             viewLifecycleOwner,
             CameraSelector.DEFAULT_BACK_CAMERA,
             preview,
-            imageCapture,
-            imageAnalysis,
         )
     }
 }
