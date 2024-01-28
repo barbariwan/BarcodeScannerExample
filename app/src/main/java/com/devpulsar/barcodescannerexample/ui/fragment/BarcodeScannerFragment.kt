@@ -17,8 +17,6 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.devpulsar.barcodescannerexample.databinding.FragmentBarcodeScannerBinding
-import com.google.mlkit.vision.barcode.BarcodeScannerOptions
-import com.google.mlkit.vision.barcode.common.Barcode
 
 class BarcodeScannerFragment : Fragment() {
     companion object {
@@ -88,18 +86,13 @@ class BarcodeScannerFragment : Fragment() {
     }
 
     private fun bindPreview(cameraProviderFuture: ProcessCameraProvider) {
-        val scannerOptions = BarcodeScannerOptions.Builder()
-            .setBarcodeFormats(
-                Barcode.FORMAT_QR_CODE)
-            .build()
-
         val imageCapture = ImageCapture.Builder().build()
         val imageAnalysis = ImageAnalysis.Builder()
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
 
         val preview = Preview.Builder().build().apply {
-            setSurfaceProvider(binding.viewFinder.surfaceProvider)
+            setSurfaceProvider(binding.preview.surfaceProvider)
         }
         cameraProviderFuture.unbindAll()
         cameraProviderFuture.bindToLifecycle(
