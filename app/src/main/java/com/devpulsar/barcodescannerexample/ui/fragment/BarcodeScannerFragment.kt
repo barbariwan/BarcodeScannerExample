@@ -28,6 +28,9 @@ class BarcodeScannerFragment : Fragment() {
             }.toTypedArray()
     }
 
+    private var _binding: FragmentBarcodeScannerBinding? = null
+    private val binding get() = _binding!!
+
     private val cameraPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) {  result ->
@@ -39,9 +42,6 @@ class BarcodeScannerFragment : Fragment() {
             }
         }
     }
-
-    private var _binding: FragmentBarcodeScannerBinding? = null
-    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
